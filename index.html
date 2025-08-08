@@ -262,15 +262,24 @@
       }
     }, { once: true });
 
-    openBtn.addEventListener('click', () => {
-      stage.classList.add('open');
-      setTimeout(() => {
-        cover.classList.remove('active');
-        fullLetter.classList.add('active');
-        startHearts();
-        startTyping();
-      }, 1100);
-    });
+openBtn.addEventListener('click', async () => {
+  // Try to start music immediately on click
+  if (audio.paused) {
+    try { 
+      await audio.play(); 
+      soundBtn.classList.remove('muted'); 
+    } catch(e){}
+  }
+
+  stage.classList.add('open');
+  setTimeout(() => {
+    cover.classList.remove('active');
+    fullLetter.classList.add('active');
+    startHearts();
+    startTyping();
+  }, 1100);
+});
+
 
     const messageLines = [
       "You light up my world with your smile and love. Having you in my life is a true blessing.",
